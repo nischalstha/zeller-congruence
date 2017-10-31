@@ -17,12 +17,14 @@ function processDates()
 	var monthNames = ["January", "February", "March", "April", "May", "June",
 	"July", "August", "September", "October", "November", "December" ];
 
+	var month, date, year;
+
 	if (input.match(dateREGEX))
 	{
 		var each = input.split("/");
-		var month = parseInt(each[0]);
-		var date = parseInt(each[1]);
-		var year = each[2];
+		month = parseInt(each[0]);
+		date = parseInt(each[1]);
+		year = each[2];
 
    		//When year is two digits, assume it starts with 20 when digits are between 00 and 49, 
    		//and assume it starts with 19 when digits are between 50 and 99.
@@ -47,18 +49,18 @@ function processDates()
    	{
    		var stringEach = input.split(" ");
    		var monthString = stringEach[0];
-   		var date = parseInt(stringEach[1].substring(0,2));
-   		var year = parseInt(stringEach[2]);
+   		date = parseInt(stringEach[1].substring(0,2));
+   		year = parseInt(stringEach[2]);
 
-   		var month = (monthNames.indexOf(monthString)) + 1;
+   		month = (monthNames.indexOf(monthString)) + 1;
 
    		//Call the function to check the validity of the date.
    		valid_date = checkDates(year, month, date);
    	}
-   }
+}
 
-   function checkDates(year, month, date)
-   {
+function checkDates(year, month, date)
+{
    	var valid_date = false;
    	var monthNames = ["January", "February", "March", "April", "May", "June",
    	"July", "August", "September", "October", "November", "December" ];
@@ -139,12 +141,12 @@ function zeller(month, date, year)
 		month -= 2;
 	}
 
-	str_year = year.toString();
-    century = parseInt(str_year.substring(0,2));
-    year_century = year % 100;
+	var str_year = year.toString();
+	var century = parseInt(str_year.substring(0,2));
+	var year_century = year % 100;
 
     //Zeller's math
-    var day_number = (Math.floor((26*month - 2)/10) + date + year_century + Math.floor(year_century/4) + Math.floor(century/4) + (5 * century)) % 7 
+    var day_number = (Math.floor((26*month - 2)/10) + date + year_century + Math.floor(year_century/4) + Math.floor(century/4) + (5 * century)) % 7;
     return day_number;
 }
 
